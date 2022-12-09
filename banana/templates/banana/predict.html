@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<section class="upload-section p-3 p-md-5 w-md-50">
+  <div class="p-3"></div>
+  <div class="guide">
+    To get a prediction of the disease in your banana plant, take a close up
+    picture of the banana leaf and upload it to the system(You can upload many
+    pictures). Once you are done click, the get predictions button(it will take
+    a few seconds to analyze and get the result)
+  </div>
+  <div class="form-container mt-3 w-md-50">
+    <form
+      action="{% url 'predictor:image_upload'%}"
+      method="post"
+      enctype="multipart/form-data"
+      class="form justify-content-center"
+    >
+      {% csrf_token %} {{ form }}
+      <input type="submit" value="upload image" class="btn btn-success" />
+    </form>
+  </div>
+  <figure class="image-container mt-3 mt-md-5">
+    {% if images %} {% for img in images %}
+    <div>
+      <img src="{{img.thumb.url}}" class="w-100 align-middle rounded" />
+      <div class="image-label d-flex justify-content-between mt-1">
+        <p>{{img.name}}</p>
+        <a
+          href="/predictor/delete_image/{{img.id}}"
+          class="delete-btn btn btn-danger"
+          >Remove</a
+        >
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <div class="image-placeholder rounded">Images will appear here</div>
+    {% endif %}
+  </figure>
+  <div class="prediction-btn-container d-flex">
+    <a href="/predictor/get_predictions" class="btn btn-primary predict-btn"
+      >Get Predictions</a
+    >
+  </div>
+</section>
+{% endblock content %}

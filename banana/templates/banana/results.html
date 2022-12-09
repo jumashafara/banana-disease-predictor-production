@@ -1,0 +1,25 @@
+{% comment %} {% extends 'base.html' %} {% block content %}  {% endcomment %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'predictor/style.css' %}" />
+<section class="image-container">
+  <h2>Prediction Results</h2>
+  {% for result in results %}
+  <div class="result-container">
+    <img src="{{result.url}}" />
+    <div class="prediction-details">
+      <h3>{{result.prediction}}</h3>
+      <p>
+        Bacon ipsum dolor amet flank bresaola filet mignon, pancetta frankfurter
+        shankle tri-tip leberkas short loin salami swine. Doner alcatra spare
+        ribs meatball. Short loin ham hock buffalo turducken salami ribeye cupim
+        chislic beef burgdoggen shankle tail drumstick. Short ribs corned beef
+        turducken, prosciutto cupim strip steak turkey flank tenderloin shankle
+        doner chuck bresaola. Ham hock pig burgdoggen tail, doner corned beef
+        venison.
+      </p>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+{% comment %} {% endblock content %} {% endcomment %}
